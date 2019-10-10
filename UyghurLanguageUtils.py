@@ -324,7 +324,7 @@ class UyghurCharUtilities:
         ]
         self._lsyn = self._pform[self._cmap['l'] - self._BPAD]
 
-    def getUyPFStr(self, text):
+    def getUyPFStr(self, text, reverse=False):
 
         if not text:
             return
@@ -333,7 +333,6 @@ class UyghurCharUtilities:
         tsyn = []
         bt = self._WDBEG
         strArray = [t for t in text]
-        pfstr = ""
         n = len(strArray)
         i = 0
         j = 0
@@ -396,5 +395,19 @@ class UyghurCharUtilities:
             prevwc = wc
             j += 1
 
-        return ''.join(pfwp)
+        if reverse:
+            pfwp.reverse()
 
+        return ''.join(pfwp)
+        
+    def getUyULYStr(self, text):
+
+        if not text:
+            return
+
+        uy = ['ئ', 'ا', 'ە', 'ې', 'ى', 'و', 'ۇ', 'ۆ', 'ۈ', 'ش', 'ڭ', 'غ', 'چ', 'ب', 'د', 'ف', 'گ', 'ھ', 'ج', 'ك', 'ل', 'م', 'ن', 'پ', 'ق', 'ر', 'س', 'ت', 'ۋ', 'ي', 'ز', 'خ', 'ژ', '،', '؟', '!', '؛', '(', ')', ' ']
+        uly = ['', 'a', 'e', 'e', 'i', 'o', 'u', 'o', 'u', 'sh', 'ng', 'gh', 'ch', 'b', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'm', 'n', 'p', 'q', 'r', 's', 't', 'w', 'y', 'z', 'x', 'J', ',', '?', '!', ';', ')', '(', ' ']
+
+        uly_text = ''.join([uly[uy.index(t)] for t in text])
+
+        return uly_text
